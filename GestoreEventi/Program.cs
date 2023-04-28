@@ -1,6 +1,32 @@
 ﻿using GestoreEventi;
 
-Console.WriteLine( "Welcome to your EventPlanner");
+Console.WriteLine( "Welcome to your EventPlanner\n");
+
+//CREATING A PROGRAM OF EVENTS
+Console.Write("\nPlease insert the name of the program of events you want to create: ");
+string userInputProgramTitle = Console.ReadLine();
+
+Console.Write("\nHow many events do you want to plan for this program?");
+int userInputNumberOfEvents;
+try { 
+userInputNumberOfEvents = int.Parse(Console.ReadLine());
+}
+catch(Exception e) 
+{ 
+    Console.WriteLine(e.ToString());
+    bool validated= false;
+    while (!validated)
+    {
+        Console.Write("\nPlease insert a number:");
+        string numberToCheck = Console.ReadLine();
+        bool isANumber = int.TryParse(numberToCheck, out userInputNumberOfEvents);
+        if (isANumber)
+        {
+            userInputNumberOfEvents = int.Parse(numberToCheck);
+            validated = true;
+        }
+    }
+}
 
 //USER INPUTS TO GET ATTRIBUTES FOR THE EVENT CONSTRUCTOR
 Console.Write("Please insert the title of the event you wish to plan: ");
