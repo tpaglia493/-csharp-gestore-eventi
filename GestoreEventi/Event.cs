@@ -70,5 +70,22 @@ namespace GestoreEventi
             }
             this.numberOfReservations += numberOfSeatsToReserve;
         }
+
+        public void cancelReservations(int reservationsToCancel)
+        {
+            if (eventDate.CompareTo(DateTime.Now) < 0)
+            {
+                throw new Exception("Can't cancel reservations for a past event!");
+            }
+            this.numberOfReservations -= reservationsToCancel;
+        }
+
+        public override string ToString()
+        {
+            string info = "--------- EVENT ----------";
+            info += $"Title: {eventTitle}\n";
+            info += $"On Date: {eventDate.ToString("dd/MM/yyyy")}\n";
+            return info;
+        }
     }
 }
