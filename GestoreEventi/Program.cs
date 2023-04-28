@@ -1,6 +1,6 @@
 ﻿using GestoreEventi;
 
-Console.WriteLine("Welcome to your EventPlanner");
+Console.WriteLine( "Welcome to your EventPlanner");
 
 //USER INPUTS TO GET ATTRIBUTES FOR THE EVENT CONSTRUCTOR
 Console.Write("Please insert the title of the event you wish to plan: ");
@@ -16,6 +16,21 @@ int userInputMaximumSeats = int.Parse(Console.ReadLine());
 
 Event newEvent = new Event(userInputEventTitle, userInputEventDate, userInputMaximumSeats);
 
+
+//USER INTERFACE
+bool userWantsToReserve = true;
+
+while (userWantsToReserve) 
+{ 
+    Console.WriteLine($"Would you like to reserve seats for the event '{newEvent.GetTitle()}'?");
+    string userAnswer = Console.ReadLine().ToUpper();
+    Console.WriteLine(userAnswer);
+    if (userAnswer != "SI" && userAnswer != "YES" && userAnswer != "Y" && userAnswer != "SÌ" && userAnswer != "S")
+    {
+        userWantsToReserve = false;
+    }
 Console.WriteLine("How many seats would you like to reserve?");
 int userInputSeatsToReserve =  int.Parse(Console.ReadLine());
+}
+Console.WriteLine(newEvent.ToString());
 
