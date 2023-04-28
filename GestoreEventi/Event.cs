@@ -39,7 +39,7 @@ namespace GestoreEventi
         { 
             if(eventTitle == "")
             {
-                throw new ArgumentException("Can't plan an event without a title", "title")
+                throw new ArgumentException("Can't plan an event without a title", "title");
             }
             this.eventTitle = eventTitle;
         }
@@ -62,6 +62,13 @@ namespace GestoreEventi
         }
 
         //METHODS
-
+        public void reserveSeats(int numberOfSeatsToReserve)
+        {
+            if (eventDate.CompareTo(DateTime.Now) < 0)
+            {
+                throw new Exception("Can't reserve seats for a past event!");
+            }
+            this.numberOfReservations += numberOfSeatsToReserve;
+        }
     }
 }
