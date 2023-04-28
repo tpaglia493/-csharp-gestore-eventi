@@ -10,7 +10,7 @@ namespace GestoreEventi
     {
         //ATTRIBUTES
         private string programTitle;
-        List<Event> events;
+        private  List<Event> events;
         //CONSTRUCTOR
         public EventProgram(string programTitle)
         {
@@ -52,5 +52,8 @@ namespace GestoreEventi
             }
             Console.WriteLine(info);
         }
+
+        public void ClearActualListOfEVents() { events.Clear(); }
+
     }
 }
