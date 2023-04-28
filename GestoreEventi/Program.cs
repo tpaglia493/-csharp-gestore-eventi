@@ -7,7 +7,7 @@ Console.WriteLine( "Welcome to your EventPlanner\n");
     //GET EVENT PROGRAM NAME FROM USER
 Console.Write("\nPlease insert the name of the program of events you want to create: ");
 string userInputProgramTitle = Console.ReadLine();
-EventProgram newProgram = new EventProgram(userInputProgramTitle);
+EventProgram newProgramOfEvents = new EventProgram(userInputProgramTitle);
 
     //GET NUMBER OF EVENTS TO PLAN FROM USER
 Console.Write("\nHow many events do you want to plan for this program?");
@@ -33,7 +33,7 @@ catch(Exception e)  //IN CASE OF ERROR
 }
 
 //CREATE A NUMBER OF EVENTS SAME AS NUMBER FROM USER INPUT AND ADD THEM TO THE LIST OF EVENTS
-for (int i = 0; i < userInputNumberOfEvents;)
+for (int i = 0; i < userInputNumberOfEvents;i++)
 {
     //EVENT CONSTRUCTION
     Event newEvent = new Event();
@@ -118,10 +118,16 @@ for (int i = 0; i < userInputNumberOfEvents;)
         }
     }
         //ADD EVENT TO EVENT PROGRAM LIST
-        newProgram.AddEvent(newEvent);
-
-  
+        newProgramOfEvents.AddEvent(newEvent);
 }
+
+Console.WriteLine($"Your program contains {newProgramOfEvents.GetNumberOfEvents()} events");
+Console.WriteLine(newProgramOfEvents.ToString());
+Console.WriteLine("Insert a date to check if there ara events on thata day:");
+DateTime dateToCheck = DateTime.Parse(Console.ReadLine());
+List<Event> eventsOnSameDate = newProgramOfEvents.GetEventsInSameDate(dateToCheck);
+EventProgram.PrintListOfEvents(eventsOnSameDate);
+newProgramOfEvents.ClearActualListOfEvents()
 
 /*****************************************************************************************************************************
 //USER INTERFACE
