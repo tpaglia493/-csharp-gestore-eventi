@@ -16,6 +16,14 @@ namespace GestoreEventi
 
         //CONSTRUCTOR
 
+        public Event(string eventTitle, DateTime eventDate, int maximumSeats ) 
+        {
+            SetEventTitle(eventTitle);
+            SetEventDate(eventDate);
+            SetMaximumSeats(maximumSeats);
+            numberOfReservations = 0;
+        }
+
         //GETTERS
         public string GetTitle() { return eventTitle; }
      
@@ -27,7 +35,7 @@ namespace GestoreEventi
 
         //SETTERS
 
-        public void SetTitle(string eventTitle) 
+        public void SetEventTitle(string eventTitle) 
         { 
             if(eventTitle == "")
             {
