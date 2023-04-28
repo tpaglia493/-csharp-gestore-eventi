@@ -41,5 +41,16 @@ namespace GestoreEventi
             }
             return eventsInSpecificDate;
         }
+
+        public static void PrintListOfEvents(List<Event> anyListOfEvents) 
+        {
+            string info = $"Events in program for {nameof(anyListOfEvents)}";
+            foreach (Event anyEvent in anyListOfEvents)
+            {
+
+                info += anyEvent.ToString();
+            }
+            Console.WriteLine(info);
+        }
     }
 }
