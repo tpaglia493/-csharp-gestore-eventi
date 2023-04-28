@@ -3,19 +3,22 @@
 Console.WriteLine( "Welcome to your EventPlanner\n");
 
 //CREATING A PROGRAM OF EVENTS
+
+    //GET EVENT PROGRAM NAME FROM USER
+Console.ReadLine();
 Console.Write("\nPlease insert the name of the program of events you want to create: ");
 string userInputProgramTitle = Console.ReadLine();
-
+    //GET NUMBER OF EVENTS FROM USER
 Console.Write("\nHow many events do you want to plan for this program?");
 int userInputNumberOfEvents;
 try { 
 userInputNumberOfEvents = int.Parse(Console.ReadLine());
 }
-catch(Exception e) 
+catch(Exception e)  //IN CASE OF ERROR 
 { 
     Console.WriteLine(e.ToString());
     bool validated= false;
-    while (!validated)
+    while (!validated)      //GET AND VALIDATE A NEW NUMBER OF EVENTS FROM USER
     {
         Console.Write("\nPlease insert a number:");
         string numberToCheck = Console.ReadLine();
