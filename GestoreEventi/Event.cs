@@ -14,7 +14,7 @@ namespace GestoreEventi
         private int maximumSeats;
         private int numberOfReservations;
 
-        //CONSTRUCTOR
+        //CONSTRUCTORS
 
         public Event(string eventTitle, DateTime eventDate, int maximumSeats ) 
         {
@@ -22,6 +22,14 @@ namespace GestoreEventi
             SetEventDate(eventDate);
             SetMaximumSeats(maximumSeats);
             numberOfReservations = 0;
+        }
+        
+        public Event()
+        {
+            this.eventTitle = string.Empty;
+            this.eventDate= new DateTime();
+            this.numberOfReservations = 0;
+
         }
 
         //GETTERS

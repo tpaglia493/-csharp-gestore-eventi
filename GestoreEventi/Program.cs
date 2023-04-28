@@ -7,7 +7,9 @@ Console.WriteLine( "Welcome to your EventPlanner\n");
     //GET EVENT PROGRAM NAME FROM USER
 Console.Write("\nPlease insert the name of the program of events you want to create: ");
 string userInputProgramTitle = Console.ReadLine();
-    //GET NUMBER OF EVENTS FROM USER
+EventProgram newProgram = new EventProgram(userInputProgramTitle);
+
+    //GET NUMBER OF EVENTS TO PLAN FROM USER
 Console.Write("\nHow many events do you want to plan for this program?");
 int userInputNumberOfEvents=0;
 try { 
@@ -30,23 +32,53 @@ catch(Exception e)  //IN CASE OF ERROR
     }
 }
 
-for(int i= 0; i<userInputNumberOfEvents; i++) { }
+
+for(int i= 0; i<userInputNumberOfEvents; i++) {
 
 //USER INPUTS TO GET ATTRIBUTES FOR THE EVENT CONSTRUCTOR
+
+    //GET NAME OF EVENT FROM USER INPUT
 Console.Write("Please insert the title of the event you wish to plan: ");
 string userInputEventTitle = Console.ReadLine();
 
+    //GET DATE TIME OF EVENT FROM USER INPUT
 Console.Write("Please insert the date of the event in format dd/mm/yyyy: ");
-DateTime userInputEventDate = DateTime.Parse(Console.ReadLine());
+DateTime userInputEventDate = new DateTime();   
+    try 
+    { 
+        userInputEventDate = DateTime.Parse(Console.ReadLine()); 
+    }
+    catch (Exception e)     //IN CASE OF ERROR
+    {
+        Console.WriteLine(e.ToString());
+        bool validated = false;
+        while (!validated)      //GET AND VALIDATE A NEW DATE TIME FROM USER
+        {
+            Console.Write("\nPlease insert the date in the right format dd/mm/yyyy:");
+            string DateToCheck = Console.ReadLine();
+            bool isADate = DateTime.TryParse(DateToCheck, out userInputEventDate);
+            if (isADate)
+            {
+                userInputEventDate = DateTime.Parse(DateToCheck);
+                validated = true;
+            }
+        }
+    }
+
 
 Console.Write("Please insert the number of maximum seats for the event: ");
 int userInputMaximumSeats = int.Parse(Console.ReadLine());
 
-//EVENT CONSTRUCTION
+    //EVENT CONSTRUCTION
 
 Event newEvent = new Event(userInputEventTitle, userInputEventDate, userInputMaximumSeats);
 
+    //ADD EVENT TO EVENT PROGRAM LIST
+    newProgram.AddEvent(newEvent);
 
+}
+
+/*****************************************************************************************************************************
 //USER INTERFACE
 
 //SEATS RESERVATION
@@ -85,4 +117,4 @@ while (userWantsToCancel)
     }
 
 }
-
+*******************************************************************************************************************************/
