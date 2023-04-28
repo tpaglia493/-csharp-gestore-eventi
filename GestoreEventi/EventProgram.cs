@@ -55,5 +55,17 @@ namespace GestoreEventi
 
         public void ClearActualListOfEVents() { events.Clear(); }
 
+        public int GetNumberOfEvents() { return events.Count; }
+
+        public override string ToString()
+        {
+            string info = $"---------- {this.programTitle} ----------";
+            foreach (Event anyEvent in events)
+            {
+                info += anyEvent.ToString();
+            }
+            info += "--------------------------------------";
+            return info;
+        }
     }
 }
