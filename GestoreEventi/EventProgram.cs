@@ -6,7 +6,40 @@ using System.Threading.Tasks;
 
 namespace GestoreEventi
 {
-    internal class EventProgram
+    public class EventProgram
     {
+        //ATTRIBUTES
+        private string programTitle;
+        List<Event> events;
+        //CONSTRUCTOR
+        public EventProgram(string programTitle)
+        {
+            this.programTitle = programTitle;
+            events = new();
+        }
+
+        //GETTERS
+
+        //SETTERS
+
+        //METHODS
+
+        public void AddEvent(Event newEvent) 
+        { 
+            events.Add(newEvent);
+        }
+
+        public List<Event> GetEventsInSameDate(DateTime specificDate)
+        {
+            List<Event> eventsInSpecificDate = new List<Event>();
+            foreach (Event anyEvent in this.events) 
+            {
+                if(specificDate.CompareTo(anyEvent.GetEventDate()) == 0)
+                {
+                    eventsInSpecificDate.Add(anyEvent);
+                }
+            }
+            return eventsInSpecificDate;
+        }
     }
 }
