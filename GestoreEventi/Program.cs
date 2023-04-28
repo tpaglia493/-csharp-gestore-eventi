@@ -32,25 +32,26 @@ catch(Exception e)  //IN CASE OF ERROR
     }
 }
 
-
-for(int i= 0; i<userInputNumberOfEvents;) {
-//EVENT CONSTRUCTION
-Event newEvent = new Event();
+//CREATE A NUMBER OF EVENTS SAME AS NUMBER FROM USER INPUT AND ADD THEM TO THE LIST OF EVENTS
+for (int i = 0; i < userInputNumberOfEvents;)
+{
+    //EVENT CONSTRUCTION
+    Event newEvent = new Event();
 
     //USER INPUTS TO GET ATTRIBUTES FOR THE EVENT CONSTRUCTOR
 
     //GET NAME OF EVENT FROM USER INPUT
     Console.Write("Please insert the title of the event you wish to plan: ");
-string userInputEventTitle = Console.ReadLine();
-   newEvent.SetEventTitle(userInputEventTitle);
+    string userInputEventTitle = Console.ReadLine();
+    newEvent.SetEventTitle(userInputEventTitle);
 
-    //GET DATE TIME OF EVENT FROM USER INPUT
-Console.Write("Please insert the date of the event in format dd/mm/yyyy: ");
-DateTime userInputEventDate = new DateTime();   
-    try 
-    { 
+    //GET DATE TIME OF EVENT FROM USER INPUT AND VALIDATE INPUT
+    Console.Write("Please insert the date of the event in format dd/mm/yyyy: ");
+    DateTime userInputEventDate = new DateTime();
+    try
+    {
         userInputEventDate = DateTime.Parse(Console.ReadLine());
-       
+
     }
     catch (Exception e)     //IN CASE OF ERROR
     {
@@ -58,7 +59,7 @@ DateTime userInputEventDate = new DateTime();
         bool validated = false;
         while (!validated)      //GET AND VALIDATE A NEW DATE TIME FROM USER
         {
-            Console.Write("\nPlease insert the date in the right format dd/mm/yyyy:");
+            Console.Write("\nPlease insert the date in the right format dd/mm/yyyy: ");
             string DateToCheck = Console.ReadLine();
             bool isADate = DateTime.TryParse(DateToCheck, out userInputEventDate);
             if (isADate)
@@ -68,37 +69,58 @@ DateTime userInputEventDate = new DateTime();
             }
         }
     }
-  try { 
-        newEvent.SetEventDate(userInputEventDate); 
-    }catch(ArgumentException e)
+    try
+    {
+        newEvent.SetEventDate(userInputEventDate);
+    }
+    catch (ArgumentException e)
     {
         Console.WriteLine(e.ToString());
         bool validated = false;
         while (!validated)      //GET AND VALIDATE A NEW DATE TIME FROM USER
         {
-            Console.Write("\nPlease insert a valid date in the right format dd/mm/yyyy:");
+            Console.Write("\nPlease insert a valid date in the right format dd/mm/yyyy: ");
             string DateToCheck = Console.ReadLine();
             bool isADate = DateTime.TryParse(DateToCheck, out userInputEventDate);
             if (isADate)
             {
-             DateTime DateChecked = DateTime.Parse(DateToCheck);
-                if (DateChecked.CompareTo(DateTime.Now) >= 0) 
-                { 
+                DateTime DateChecked = DateTime.Parse(DateToCheck);
+                if (DateChecked.CompareTo(DateTime.Now) >= 0)
+                {
                     newEvent.SetEventDate(DateChecked);
-                    validated = true; 
+                    validated = true;
                 }
-            }          
+            }
         }
     }
 
+    //GET MAXIMUM NUMBER OF SEATS FOR THE EVENT
+    Console.Write("Please insert the number of maximum seats for the event: ");
+    int userInputMaximumSeats = int.Parse(Console.ReadLine());
+    try
+    {
+        newEvent.SetMaximumSeats(userInputMaximumSeats);
+    }
+    catch (ArgumentException e)  //IN CASE OF ERROR
+    {
+        Console.WriteLine(e.ToString());
+        bool validated = false;
+        while (!validated)      //GET AND VALIDATE A NEW NUMBER OF SEATS FROM USER
+        {
+            Console.Write("\nPlease insert a valid number of seats for the event: ");
+            string numberToCheck = Console.ReadLine();
+            bool isANumuber = int.TryParse(numberToCheck, out userInputMaximumSeats);
+            if (isANumuber)
+            {
+                userInputMaximumSeats = int.Parse(numberToCheck);
+                validated = true;
+            }
+        }
+    }
+        //ADD EVENT TO EVENT PROGRAM LIST
+        newProgram.AddEvent(newEvent);
 
-Console.Write("Please insert the number of maximum seats for the event: ");
-int userInputMaximumSeats = int.Parse(Console.ReadLine());
-
-
-    //ADD EVENT TO EVENT PROGRAM LIST
-    newProgram.AddEvent(newEvent);
-
+  
 }
 
 /*****************************************************************************************************************************

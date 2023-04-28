@@ -61,7 +61,7 @@ namespace GestoreEventi
             this.eventDate = eventDate;
         }
 
-        private void SetMaximumSeats(int maximumSeats)
+        public void SetMaximumSeats(int maximumSeats)
         {
             if (maximumSeats < 0)
             {
