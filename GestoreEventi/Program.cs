@@ -5,12 +5,11 @@ Console.WriteLine( "Welcome to your EventPlanner\n");
 //CREATING A PROGRAM OF EVENTS
 
     //GET EVENT PROGRAM NAME FROM USER
-Console.ReadLine();
 Console.Write("\nPlease insert the name of the program of events you want to create: ");
 string userInputProgramTitle = Console.ReadLine();
     //GET NUMBER OF EVENTS FROM USER
 Console.Write("\nHow many events do you want to plan for this program?");
-int userInputNumberOfEvents;
+int userInputNumberOfEvents=0;
 try { 
 userInputNumberOfEvents = int.Parse(Console.ReadLine());
 }
@@ -30,6 +29,8 @@ catch(Exception e)  //IN CASE OF ERROR
         }
     }
 }
+
+for(int i= 0; i<userInputNumberOfEvents; i++) { }
 
 //USER INPUTS TO GET ATTRIBUTES FOR THE EVENT CONSTRUCTOR
 Console.Write("Please insert the title of the event you wish to plan: ");
