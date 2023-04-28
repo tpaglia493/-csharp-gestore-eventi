@@ -59,6 +59,7 @@ namespace GestoreEventi
             {
                 throw new ArgumentOutOfRangeException("maximumSeat", "Maximum seats can't be a negative number!");
             }
+            this.maximumSeats = maximumSeats;
         }
 
         //METHODS
@@ -77,6 +78,14 @@ namespace GestoreEventi
             {
                 throw new Exception("Can't cancel reservations for a past event!");
             }
+            if (reservationsToCancel < 0)
+            {
+                throw new ArgumentException("Can't delete a negative number of reservations", "reservationsToCancel");
+            }
+            if (reservationsToCancel > this.numberOfReservations)
+            {
+                throw new ArgumentException("Can't delete more reservations than actual numberOfReservations", "reservationsToCancel");
+            }
             this.numberOfReservations -= reservationsToCancel;
         }
 
@@ -87,5 +96,7 @@ namespace GestoreEventi
             info += $"On Date: {eventDate.ToString("dd/MM/yyyy")}\n";
             return info;
         }
+
+        
     }
 }

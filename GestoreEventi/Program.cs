@@ -39,17 +39,20 @@ Console.WriteLine($"There are now {newEvent.GetMaximumSeats() - newEvent.GetNumb
 bool userWantsToCancel = true;
 while (userWantsToCancel)
 {
-    Console.WriteLine($"Would you like to cancel reservations for the event '{newEvent.GetTitle()}'?");
+    Console.WriteLine($"\nWould you like to cancel reservations for the event '{newEvent.GetTitle()}'?");
     string userAnswer = Console.ReadLine().ToUpper();
     if (userAnswer == "SI" || userAnswer == "YES" || userAnswer == "Y" || userAnswer == "SÌ" || userAnswer == "S")
     {
-        Console.WriteLine("How many reservations would you like to cancel?");
+        Console.WriteLine("\nHow many reservations would you like to cancel?");
         int userInputReservationsToCancel = int.Parse(Console.ReadLine());
         newEvent.cancelReservations(userInputReservationsToCancel);
-        Console.WriteLine($"The number of actual reservations is {newEvent.GetNumberOfReservations()}");
+        Console.WriteLine($"\nThe number of actual reservations is {newEvent.GetNumberOfReservations()}");
         Console.WriteLine($"There are now {newEvent.GetMaximumSeats() - newEvent.GetNumberOfReservations()} remaining seats");
     }
-    else { userWantsToCancel = false; }
+    else { 
+        userWantsToCancel = false;
+        Console.WriteLine("Thank you");
+    }
 
 }
 
