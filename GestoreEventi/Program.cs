@@ -123,7 +123,7 @@ for (int i = 0; i < userInputNumberOfEvents; i++)
 
 Console.WriteLine($"\nYour program contains {newProgramOfEvents.GetNumberOfEvents()} events");
 Console.WriteLine(newProgramOfEvents.ToString());
-Console.WriteLine("\nInsert a date to check if there are events on that day: ");
+Console.Write("\nInsert a date to check if there are events on that day: ");
 DateTime eventDateFromUser = DateTime.Now;
 try
 {
