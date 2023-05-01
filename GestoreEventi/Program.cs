@@ -26,8 +26,8 @@ catch(Exception e)  //IN CASE OF ERROR
         Console.Write("\nHow many events do you want to plan for this program? ");
         Console.Write("\nPlease insert a number: ");
         string numberToCheck = Console.ReadLine();
-        bool isANumber = int.TryParse(numberToCheck, out userInputNumberOfEvents);
-        if (isANumber)
+        bool isChecked = int.TryParse(numberToCheck, out userInputNumberOfEvents);
+        if (isChecked)
         {
             //userInputNumberOfEvents = int.Parse(numberToCheck);
             validated = true;
@@ -65,8 +65,8 @@ for (int i = 0; i < userInputNumberOfEvents; i++)
             Console.WriteLine(e.ToString());
             Console.Write("\nPlease insert the date in the right format dd/mm/yyyy: ");
             string DateToCheck = Console.ReadLine();
-            bool isADate = DateTime.TryParse(DateToCheck, out userInputEventDate);
-            if (isADate)
+            bool isChecked = DateTime.TryParse(DateToCheck, out userInputEventDate);
+            if (isChecked)
             {
                 validated = true;
             }
@@ -84,8 +84,8 @@ for (int i = 0; i < userInputNumberOfEvents; i++)
             Console.WriteLine(e.ToString());
             Console.Write("\nPlease insert a valid date in the right format dd/mm/yyyy: ");
             string DateToCheck = Console.ReadLine();
-            bool isADate = DateTime.TryParse(DateToCheck, out userInputEventDate);
-            if (isADate && userInputEventDate.CompareTo(DateTime.Now) >=0)
+            bool isChecked = DateTime.TryParse(DateToCheck, out userInputEventDate);
+            if (isChecked && userInputEventDate.CompareTo(DateTime.Now) >=0)
             {
                 newEvent.SetEventDate(userInputEventDate);
                     validated = true;
@@ -110,8 +110,8 @@ for (int i = 0; i < userInputNumberOfEvents; i++)
             Console.WriteLine(e.ToString());
             Console.Write("\nPlease insert a valid number of seats for the event: ");
             string numberToCheck = Console.ReadLine();
-            bool isANumuber = int.TryParse(numberToCheck, out userInputMaximumSeats);
-            if (isANumuber)
+            bool isChecked = int.TryParse(numberToCheck, out userInputMaximumSeats);
+            if (isChecked)
             {
                 validated = true;
             }
@@ -138,8 +138,8 @@ catch (Exception e)     //IN CASE OF ERROR
         Console.WriteLine(e.ToString());
         Console.Write("\nPlease insert the date in the right format dd/mm/yyyy: ");
         string DateToCheck = Console.ReadLine();
-        bool isADate = DateTime.TryParse(DateToCheck, out eventDateFromUser);
-        if (isADate)
+        bool isChecked = DateTime.TryParse(DateToCheck, out eventDateFromUser);
+        if (isChecked)
         {
             validated = true;
         }
