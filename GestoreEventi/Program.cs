@@ -7,47 +7,50 @@ Console.WriteLine( "Welcome to your EventPlanner\n");
     //GET EVENT PROGRAM NAME FROM USER
 Console.Write("\nPlease insert the name of the program of events you want to create: ");
 string userInputProgramTitle = Console.ReadLine();
+
 EventProgram newProgramOfEvents = new EventProgram(userInputProgramTitle);
 
     //GET NUMBER OF EVENTS TO PLAN FROM USER
-Console.Write("\nHow many events do you want to plan for this program?");
-int userInputNumberOfEvents=0;
+Console.Write("\nHow many events do you want to plan for this program? ");
+int userInputNumberOfEvents = 0;
 try { 
 userInputNumberOfEvents = int.Parse(Console.ReadLine());
 }
 catch(Exception e)  //IN CASE OF ERROR 
 { 
-    Console.WriteLine(e.ToString());
+    
     bool validated= false;
     while (!validated)      //GET AND VALIDATE A NEW NUMBER OF EVENTS FROM USER
     {
-        Console.Write("\nPlease insert a number:");
+        Console.WriteLine(e.ToString());
+        Console.Write("\nHow many events do you want to plan for this program? ");
+        Console.Write("\nPlease insert a number: ");
         string numberToCheck = Console.ReadLine();
         bool isANumber = int.TryParse(numberToCheck, out userInputNumberOfEvents);
         if (isANumber)
         {
-            userInputNumberOfEvents = int.Parse(numberToCheck);
+            //userInputNumberOfEvents = int.Parse(numberToCheck);
             validated = true;
         }
     }
 }
 
 //CREATE A NUMBER OF EVENTS SAME AS NUMBER FROM USER INPUT AND ADD THEM TO THE LIST OF EVENTS
-for (int i = 0; i < userInputNumberOfEvents;i++)
+for (int i = 0; i < userInputNumberOfEvents; i++)
 {
-    //EVENT CONSTRUCTION
+//EVENT CONSTRUCTION
     Event newEvent = new Event();
 
     //USER INPUTS TO GET ATTRIBUTES FOR THE EVENT CONSTRUCTOR
 
-    //GET NAME OF EVENT FROM USER INPUT
-    Console.Write("Please insert the title of the event you wish to plan: ");
+//GET NAME OF EVENT FROM USER INPUT
+    Console.Write("\nPlease insert the title of the event you wish to plan: ");
     string userInputEventTitle = Console.ReadLine();
     newEvent.SetEventTitle(userInputEventTitle);
 
-    //GET DATE TIME OF EVENT FROM USER INPUT AND VALIDATE INPUT
+//GET DATE TIME OF EVENT FROM USER INPUT AND VALIDATE INPUT
     Console.Write("Please insert the date of the event in format dd/mm/yyyy: ");
-    DateTime userInputEventDate = new DateTime();
+    DateTime userInputEventDate = DateTime.Now;
     try
     {
         userInputEventDate = DateTime.Parse(Console.ReadLine());
@@ -55,16 +58,16 @@ for (int i = 0; i < userInputNumberOfEvents;i++)
     }
     catch (Exception e)     //IN CASE OF ERROR
     {
-        Console.WriteLine(e.ToString());
+        
         bool validated = false;
         while (!validated)      //GET AND VALIDATE A NEW DATE TIME FROM USER
         {
+            Console.WriteLine(e.ToString());
             Console.Write("\nPlease insert the date in the right format dd/mm/yyyy: ");
             string DateToCheck = Console.ReadLine();
             bool isADate = DateTime.TryParse(DateToCheck, out userInputEventDate);
             if (isADate)
             {
-                userInputEventDate = DateTime.Parse(DateToCheck);
                 validated = true;
             }
         }
@@ -73,28 +76,25 @@ for (int i = 0; i < userInputNumberOfEvents;i++)
     {
         newEvent.SetEventDate(userInputEventDate);
     }
-    catch (ArgumentException e)
+    catch (ArgumentException e) //IN CASE OF ERROR
     {
-        Console.WriteLine(e.ToString());
-        bool validated = false;
+                bool validated = false;
         while (!validated)      //GET AND VALIDATE A NEW DATE TIME FROM USER
         {
+            Console.WriteLine(e.ToString());
             Console.Write("\nPlease insert a valid date in the right format dd/mm/yyyy: ");
             string DateToCheck = Console.ReadLine();
             bool isADate = DateTime.TryParse(DateToCheck, out userInputEventDate);
-            if (isADate)
+            if (isADate && userInputEventDate.CompareTo(DateTime.Now) >=0)
             {
-                DateTime DateChecked = DateTime.Parse(DateToCheck);
-                if (DateChecked.CompareTo(DateTime.Now) >= 0)
-                {
-                    newEvent.SetEventDate(DateChecked);
+                newEvent.SetEventDate(userInputEventDate);
                     validated = true;
-                }
+              
             }
         }
     }
 
-    //GET MAXIMUM NUMBER OF SEATS FOR THE EVENT
+//GET MAXIMUM NUMBER OF SEATS FOR THE EVENT
     Console.Write("Please insert the number of maximum seats for the event: ");
     int userInputMaximumSeats = int.Parse(Console.ReadLine());
     try
@@ -103,31 +103,51 @@ for (int i = 0; i < userInputNumberOfEvents;i++)
     }
     catch (ArgumentException e)  //IN CASE OF ERROR
     {
-        Console.WriteLine(e.ToString());
+
         bool validated = false;
         while (!validated)      //GET AND VALIDATE A NEW NUMBER OF SEATS FROM USER
         {
+            Console.WriteLine(e.ToString());
             Console.Write("\nPlease insert a valid number of seats for the event: ");
             string numberToCheck = Console.ReadLine();
             bool isANumuber = int.TryParse(numberToCheck, out userInputMaximumSeats);
             if (isANumuber)
             {
-                userInputMaximumSeats = int.Parse(numberToCheck);
                 validated = true;
             }
         }
     }
-        //ADD EVENT TO EVENT PROGRAM LIST
-        newProgramOfEvents.AddEvent(newEvent);
+//ADD EVENT TO EVENT PROGRAM LIST
+    newProgramOfEvents.AddEvent(newEvent);
 }
 
-Console.WriteLine($"Your program contains {newProgramOfEvents.GetNumberOfEvents()} events");
+Console.WriteLine($"\nYour program contains {newProgramOfEvents.GetNumberOfEvents()} events");
 Console.WriteLine(newProgramOfEvents.ToString());
-Console.WriteLine("Insert a date to check if there ara events on thata day:");
-DateTime dateToCheck = DateTime.Parse(Console.ReadLine());
-List<Event> eventsOnSameDate = newProgramOfEvents.GetEventsInSameDate(dateToCheck);
+Console.WriteLine("\nInsert a date to check if there are events on that day: ");
+DateTime eventDateFromUser = DateTime.Now;
+try
+{
+    eventDateFromUser = DateTime.Parse(Console.ReadLine());
+}
+catch (Exception e)     //IN CASE OF ERROR
+{
+
+    bool validated = false;
+    while (!validated)      //GET AND VALIDATE A NEW DATE TIME FROM USER
+    {
+        Console.WriteLine(e.ToString());
+        Console.Write("\nPlease insert the date in the right format dd/mm/yyyy: ");
+        string DateToCheck = Console.ReadLine();
+        bool isADate = DateTime.TryParse(DateToCheck, out eventDateFromUser);
+        if (isADate)
+        {
+            validated = true;
+        }
+    }
+}
+    List<Event> eventsOnSameDate = newProgramOfEvents.GetEventsInSameDate(eventDateFromUser);
 EventProgram.PrintListOfEvents(eventsOnSameDate);
-newProgramOfEvents.ClearActualListOfEvents()
+newProgramOfEvents.ClearActualListOfEvents();
 
 /*****************************************************************************************************************************
 //USER INTERFACE

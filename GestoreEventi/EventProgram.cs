@@ -44,7 +44,7 @@ namespace GestoreEventi
 
         public static void PrintListOfEvents(List<Event> anyListOfEvents) 
         {
-            string info = $"Events in program for {nameof(anyListOfEvents)}";
+            string info = $"Events in program for the chosen date\n";
             foreach (Event anyEvent in anyListOfEvents)
             {
 
